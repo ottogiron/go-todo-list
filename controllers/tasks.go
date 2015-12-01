@@ -13,15 +13,15 @@ type Tasks struct {
 }
 
 // Register registers this plugin in the server
-func (tasks *Tasks) Register(server server.Server) {
-	server.HandleFunc("/", handleHello).Methods("GET")
+func (t *Tasks) Register(server server.Server) {
+	server.HandleFunc("/tasks", handleGet).Methods("GET")
 }
 
 // Name identifier for controller
-func (tasks *Tasks) Name() string {
+func (t *Tasks) Name() string {
 	return "TasksController"
 }
 
-func handleHello(w http.ResponseWriter, r *http.Request) {
+func handleGet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Tasks Controller")
 }
