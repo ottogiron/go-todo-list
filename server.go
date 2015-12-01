@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ottogiron/chapi/server"
-	"github.com/ottogiron/go-todo-list/controllers"
+	"github.com/ottogiron/gotodo/controllers"
 )
 
 func main() {
