@@ -17,7 +17,7 @@ Implements a todo list using <a href="http://emberjs.com/">Ember</a> and <a href
 ```bash
   mkidr -p $GOPATH/github.com/<my_github_user_name>
   cd $GOPATH/src/github.com/<my_github_user_name>
-  git clone https://github.com/ottogiron/gotodo.git
+  git clone https://github.com/<my_github_user_name>/gotodo.git
   cd gotodo
   go get
   cd client && npm install && bower install  && ember build && cd ..  //ember stuff
