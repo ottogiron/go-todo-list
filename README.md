@@ -1,4 +1,4 @@
-# Go Todo List
+# Go Ember Todo List
 Implements a todo list using <a href="http://emberjs.com/">Ember</a> and Chapi <a href="https://github.com/ottogiron/chapi">Chapi</a>
 
 
