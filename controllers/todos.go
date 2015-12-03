@@ -8,20 +8,27 @@ import (
 )
 
 // Tasks handle tasks requests
-type Tasks struct {
+type Todos struct {
 	*server.BasePlugin
 }
 
 // Register registers this plugin in the server
-func (t *Tasks) Register(server server.Server) {
-	server.HandleFunc("/tasks", handleGet).Methods("GET")
+func (t *Todos) Register(server server.Server) {
+	server.HandleFunc("/todos", handleGet).Methods("GET")
 }
 
 // Name identifier for controller
-func (t *Tasks) Name() string {
+func (t *Todos) Name() string {
 	return "TasksController"
 }
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello Tasks Controller")
+	fmt.Fprint(w, `
+		[
+				{
+					"title": "My First task",
+					"isCompleted": false
+				}
+			]
+		`)
 }
