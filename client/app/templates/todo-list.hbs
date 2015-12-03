@@ -1,14 +1,14 @@
 <header id="header">
   <h1>todos</h1>
-  {{todo-input id="new-todo" type="text" value=newTitle action="todos.createTodo" placeholder="What needs to be done?"}}
+  {{todo-input id="new-todo" type="text" value=newTitle action="createTodo" placeholder="What needs to be done?"}}
 </header>
-{{#if length}}
+{{#if allTodos.length}}
   <section id="main">
     {{#if canToggle}}
       {{input type="checkbox" id="toggle-all" checked=allTodos.allAreDone}}
     {{/if}}
     <ul id="todo-list">
-      {{#each}}
+      {{#each allTodos }}
         <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
           {{#if isEditing}}
             {{todo-input type="text" class="edit" value=bufferedTitle focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
