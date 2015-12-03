@@ -19,16 +19,22 @@ func (t *Todos) Register(server server.Server) {
 
 // Name identifier for controller
 func (t *Todos) Name() string {
-	return "TasksController"
+	return "TodosController"
 }
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `
-		[
-				{
-					"title": "My First task",
-					"isCompleted": false
-				}
-			]
+		{ "todos" : [
+			{
+				"id": 1,
+				"title": "My First task",
+				"isCompleted": false
+			},
+			{
+				"id": 2,
+				"title": "My First task",
+				"isCompleted": false
+			}
+		]}
 		`)
 }
