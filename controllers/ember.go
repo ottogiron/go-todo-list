@@ -7,6 +7,7 @@ import (
 	"path"
 
 	"github.com/ottogiron/chapi/server"
+	"github.com/wunderlist/moxy"
 )
 
 const (
@@ -20,6 +21,11 @@ type Ember struct {
 
 // Register registers this plugin in the server
 func (e *Ember) Register(server server.Server) {
+
+	hosts := []string{"localhost:4200"}
+	proxy := moxy.NewReverseProxy(hosts, nil)
+	server.HandleFunc("/ember-cli-live-reload.js", proxy.ServeHTTP).Methods("GET")
+
 	server.HandleFunc("/{params:.*}", func(w http.ResponseWriter, r *http.Request) {
 
 		if r.URL.Path == "/" {
@@ -27,7 +33,6 @@ func (e *Ember) Register(server server.Server) {
 
 		} else {
 			resourcePath := path.Join(basePath, r.URL.Path)
-
 			file, err := os.Open(resourcePath)
 			defer file.Close()
 
@@ -43,6 +48,7 @@ func (e *Ember) Register(server server.Server) {
 			}
 		}
 	}).Methods("GET")
+
 }
 
 func writeIndex(w http.ResponseWriter) {
