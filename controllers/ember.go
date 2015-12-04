@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
 
 	"github.com/ottogiron/chapi/server"
 	"github.com/wunderlist/moxy"
@@ -61,6 +62,17 @@ func writeFile(w http.ResponseWriter, path string) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	ext := filepath.Ext(path)
+	var contentType string
+	switch ext {
+	case ".css":
+		contentType = "text/css"
+	case ".js":
+		contentType = "text/javascript"
+	default:
+		contentType = http.DetectContentType(file)
+	}
+	w.Header().Add("Content-Type", contentType)
 	w.Write(file)
 }
 

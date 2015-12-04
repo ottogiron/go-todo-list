@@ -32,7 +32,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 			},
 			{
 				"id": 2,
-				"title": "My First task",
+				"title": "My Second task",
 				"isCompleted": false
 			}
 		]}
