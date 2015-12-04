@@ -34,15 +34,15 @@ export default Ember.Controller.extend({
 		remaining: Ember.computed.filterBy('model', 'isCompleted', false),
 		completed: Ember.computed.filterBy('model', 'isCompleted', true),
 
-		allAreDone: function (key, value) {
-			if (value !== undefined) {
-				this.setEach('isCompleted', value);
-				return value;
-			} else {
+		allAreDone: Ember.computed('length', 'completed.length', {
+			get: function() {
 				var length = this.get('length');
 				var completedLength = this.get('completed.length');
-
 				return length > 0 && length === completedLength;
+			},
+			set: function(key, value) {
+				this.setEach('isCompleted', value);
+				return value;
 			}
-		}.property('length', 'completed.length')
+		})
 	});

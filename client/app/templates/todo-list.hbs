@@ -8,13 +8,13 @@
       {{input type="checkbox" id="toggle-all" checked=allTodos.allAreDone}}
     {{/if}}
     <ul id="todo-list">
-      {{#each allTodos }}
+      {{#each allTodos as |todo|}}
         <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
           {{#if isEditing}}
             {{todo-input type="text" class="edit" value=bufferedTitle focus-out="doneEditing" insert-newline="doneEditing" escape-press="cancelEditing"}}
           {{else}}
             {{input type="checkbox" class="toggle" checked=isCompleted}}
-            <label {{action "editTodo" on="doubleClick"}}>{{title}}</label>
+            <label {{action "editTodo" on="doubleClick"}}>{{todo.title}}</label>
             <button {{action "removeTodo"}} class="destroy"></button>
           {{/if}}
         </li>
