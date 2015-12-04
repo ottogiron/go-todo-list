@@ -1,10 +1,10 @@
-<section id="todoapp">
+<section class="todoapp">
 	{{outlet}}
 	{{#if length}}
-		<footer id="footer">
-			<span id="todo-count">
+		<footer class="footer">
+			<span class="todo-count">
 				<strong>{{remaining.length}}</strong> {{pluralize 'item' remaining.length}} left</span>
-			<ul id="filters">
+			<ul class="filters">
 				<li>
 					{{#link-to "todos.index" activeClass="selected" }}All{{/link-to}}
 				</li>
@@ -16,12 +16,12 @@
 				</li>
 			</ul>
 			{{#if completed.length}}
-				<button id="clear-completed" {{action "clearCompleted"}}>Clear completed</button>
+				<button class="clear-completed" {{action "clearCompleted"}}>Clear completed</button>
 			{{/if}}
 		</footer>
 	{{/if}}
 </section>
-<footer id="info">
+<footer class="info">
 	<p>Double-click to edit a todo</p>
 	<p>
 		Created by
