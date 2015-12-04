@@ -7,8 +7,8 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.resource('todos', { path: '/' }, function () {
-            this.resource('active');
-            this.resource('completed');
+            this.route('active');
+            this.route('completed');
         });
 });
 
