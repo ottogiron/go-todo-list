@@ -4,7 +4,7 @@
     {{todo-input class="new-todo" type="text" value=newTitle action="createTodo" placeholder="What needs to be done?"}}
   </header>
   {{outlet}}
-  {{#if length}}
+  {{#if model.length}}
     <footer class="footer">
       <span class="todo-count">
         <strong>{{remaining.length}}</strong> {{pluralize 'item' remaining.length}} left</span>

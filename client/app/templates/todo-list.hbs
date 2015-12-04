@@ -1,7 +1,7 @@
 {{#if allTodos.length}}
   <section class="main">
     {{#if canToggle}}
-      {{input type="checkbox" class="toggle-all" checked=allTodos.allAreDone}}
+      {{input type="checkbox" class="toggle-all" checked=allAreDone}}
     {{/if}}
     <ul class="todo-list">
       {{#each allTodos as |todo|}}
