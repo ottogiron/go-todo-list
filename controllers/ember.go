@@ -68,7 +68,7 @@ func writeFile(w http.ResponseWriter, path string) {
 	case ".css":
 		contentType = "text/css"
 	case ".js":
-		contentType = "text/javascript"
+		contentType = "application/javascrip"
 	default:
 		contentType = http.DetectContentType(file)
 	}
