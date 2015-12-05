@@ -7,5 +7,8 @@ export default Ember.Component.extend({
       completed.invoke('deleteRecord');
       completed.invoke('save');
     }
-  }
+  },
+  /* properties */
+  remaining: Ember.computed.filterBy('todos', 'isCompleted', false),
+  completed: Ember.computed.filterBy('todos', 'isCompleted', true)
 });
