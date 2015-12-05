@@ -21,29 +21,28 @@ export default Ember.Component.extend({
 
 				// Clear the "New Todo" text field
 				this.set('newTitle', '');
-			},
-
-			clearCompleted() {
-				var completed = this.get('completed');
-				completed.invoke('deleteRecord');
-				completed.invoke('save');
 			}
 		},
 
 		/* properties */
 
-		remaining: Ember.computed.filterBy('model', 'isCompleted', false),
-		completed: Ember.computed.filterBy('model', 'isCompleted', true),
+		remaining: Ember.computed.filterBy('todos', 'isCompleted', false),
+		completed: Ember.computed.filterBy('todos', 'isCompleted', true),
+		allAreDone: Ember.computed('todos.length', 'completed.length', {
+			get()  {
 
-		allAreDone: Ember.computed('length', 'completed.length', {
-			get: () => {
-				var length = this.get('length');
+				var length = this.get('todos.length');
 				var completedLength = this.get('completed.length');
 				return length > 0 && length === completedLength;
 			},
-			set: (key, value) => {
-				this.setEach('isCompleted', value);
+			set(key, value) {
+				this.get('todos').setEach('isCompleted', value);
 				return value;
 			}
-		})
+		}),
+    canToggle: Ember.computed('todos.length', 'todos.@each.isEditing', function() {
+      var anyTodos = this.get('todos.length');
+      var isEditing = this.get('todos').isAny('isEditing');
+      return anyTodos && !isEditing;
+    })
 	});

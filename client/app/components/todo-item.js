@@ -51,8 +51,7 @@ export default Ember.Component.extend({
   			todo.deleteRecord();
   			todo.save();
   		},
-
-  		saveWhenCompleted() {
+  		saveWhenCompleted: function() {
   			this.get('todo').save();
   		}.observes('isCompleted')
   	}
