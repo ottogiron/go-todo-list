@@ -10,11 +10,11 @@ export default Ember.Component.extend({
   		bufferedTitle: Ember.computed.oneWay('todo.title'),
 
   		actions: {
-  			editTodo: function () {
+  			editTodo() {
   				this.set('isEditing', true);
   			},
 
-  			doneEditing: function () {
+  			doneEditing() {
   				var bufferedTitle = this.get('bufferedTitle').trim();
 
   				if (Ember.isEmpty(bufferedTitle)) {
@@ -35,24 +35,24 @@ export default Ember.Component.extend({
   				this.set('isEditing', false);
   			},
 
-  			cancelEditing: function () {
+  			cancelEditing() {
   				this.set('bufferedTitle', this.get('title'));
   				this.set('isEditing', false);
   			},
 
-  			removeTodo: function () {
+  			removeTodo() {
   				this.removeTodo();
   			}
   		},
 
-  		removeTodo: function () {
+  		removeTodo() {
   			var todo = this.get('todo');
 
   			todo.deleteRecord();
   			todo.save();
   		},
 
-  		saveWhenCompleted: function () {
+  		saveWhenCompleted() {
   			this.get('todo').save();
   		}.observes('isCompleted')
   	}

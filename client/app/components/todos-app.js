@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     store: Ember.inject.service(),
 		actions: {
-			createTodo: function () {
+			createTodo() {
 				var title, todo;
 
 				// Get the todo title set by the "New Todo" text field
@@ -23,7 +23,7 @@ export default Ember.Component.extend({
 				this.set('newTitle', '');
 			},
 
-			clearCompleted: function () {
+			clearCompleted() {
 				var completed = this.get('completed');
 				completed.invoke('deleteRecord');
 				completed.invoke('save');
