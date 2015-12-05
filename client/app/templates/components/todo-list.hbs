@@ -1,0 +1,12 @@
+{{#if todos.length}}
+  <section class="main">
+    {{#if canToggle}}
+      {{input type="checkbox" class="toggle-all" checked=allAreDone}}
+    {{/if}}
+    <ul class="todo-list">
+      {{#each todos as |todo|}}
+        {{yield todo}}
+      {{/each}}
+    </ul>
+  </section>
+{{/if}}
