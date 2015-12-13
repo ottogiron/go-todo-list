@@ -53,6 +53,6 @@ export default Ember.Component.extend({
   		},
   		saveWhenCompleted: function() {
   			this.get('todo').save();
-  		}.observes('isCompleted')
+  		}.observes('todo.isCompleted')
   	}
 );
