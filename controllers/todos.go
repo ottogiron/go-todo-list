@@ -7,7 +7,7 @@ import (
 	"github.com/ottogiron/chapi/server"
 )
 
-// Tasks handle tasks requests
+// Todos handle tasks requests
 type Todos struct {
 	*server.BasePlugin
 }
@@ -24,17 +24,19 @@ func (t *Todos) Name() string {
 
 func handleGet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, `
-		{ "todos" : [
+		 [
 			{
+				"type": "todo",
 				"id": 1,
 				"title": "My First task",
 				"isCompleted": false
 			},
 			{
+				"type": "todo",
 				"id": 2,
-				"title": "My Second task",
-				"isCompleted": true 
+				"title": "My First Second task",
+				"isCompleted": true
 			}
-		]}
+		]
 		`)
 }
