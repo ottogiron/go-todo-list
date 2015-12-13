@@ -16,5 +16,12 @@ export default DS.JSONAPISerializer.extend({
     delete  resourceHash.id;
     delete resourceHash.type;
     return resourceHash;
+  },
+  serialize(snapshot, options){
+    let serialized = snapshot.attributes();
+    if(snapshot.id){
+      serialized.id = snapshot.id;
+    }
+    return serialized;
   }
 });
