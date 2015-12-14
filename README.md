@@ -7,8 +7,6 @@ Implements a back end for https://github.com/ottogiron/todo-list using  <a href=
 ### Prerrequisites
 * Install go
   * https://golang.org/doc/install
-* <a href="https://nodejs.org/en/">Node 4.x.x</a>
-
 
 ### Fork The repository
 
