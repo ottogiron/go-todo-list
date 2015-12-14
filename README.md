@@ -1,5 +1,5 @@
 # Go Ember Todo List
-Implements a todo list using <a href="http://emberjs.com/">Ember</a> and <a href="https://github.com/ottogiron/chapi">Chapi</a>
+Implements a back end for https://github.com/ottogiron/todo-list using  <a href="https://github.com/ottogiron/chapi">Chapi</a>
 
 
 ## Development
@@ -8,9 +8,9 @@ Implements a todo list using <a href="http://emberjs.com/">Ember</a> and <a href
 * Install go
   * https://golang.org/doc/install
 * <a href="https://nodejs.org/en/">Node 4.x.x</a>
-* <a href="http://ember-cli.com/">Ember CLI</a>
 
-### First Fork The repository
+
+### Fork The repository
 
 ### Run the server
 
@@ -20,6 +20,6 @@ Implements a todo list using <a href="http://emberjs.com/">Ember</a> and <a href
   git clone https://github.com/<my_github_user_name>/gotodo.git
   cd gotodo
   go get
-  cd client && npm install && bower install  && ember build && cd ..  //ember stuff
+ 
   go run server.go
 ```
