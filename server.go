@@ -11,7 +11,6 @@ func main() {
 	connectionString := ":3001"
 	s := server.NewServer()
 	s.Register(&controllers.Todos{})
-	s.Register(&controllers.Ember{})
 	runError := s.Run(connectionString)
 	if runError != nil {
 		fmt.Println("Error when running server", runError)
