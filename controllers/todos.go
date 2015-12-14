@@ -22,6 +22,7 @@ type Todos struct {
 func (t *Todos) Register(server server.Server) {
 	server.HandleFunc("/todos", handleGet).Methods("GET")
 	server.HandleFunc("/todos", handlePOST).Methods("POST")
+	server.HandleFunc("/todos/{id}", handlePOST).Methods("PATCH")
 	server.HandleFunc("/todos/{id}", handleDELETE).Methods("DELETE")
 }
 
@@ -58,7 +59,7 @@ func handleDELETE(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	collection := getTodoCollection(session)
-	collection.RemoveId(id)
+	collection.RemoveId(bson.ObjectIdHex(id))
 }
 
 func handlePOST(w http.ResponseWriter, r *http.Request) {
@@ -84,8 +85,18 @@ func handlePOST(w http.ResponseWriter, r *http.Request) {
 	}
 
 	collection := getTodoCollection(session)
-	collection.Insert(todo)
+	if r.Method == "POST" {
+		collection.Insert(todo)
+	} else {
+		//it's PATCH
+		vars := server.Vars(r)
+		id := vars["id"]
+		collection.UpdateId(bson.ObjectIdHex(id), todo)
+	}
 	json.NewEncoder(w).Encode(todo)
+}
+
+func handlePATCH(w http.ResponseWriter, r *http.Request) {
 
 }
 
