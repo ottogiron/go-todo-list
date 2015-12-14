@@ -23,5 +23,15 @@ export default DS.JSONAPISerializer.extend({
       serialized.id = snapshot.id;
     }
     return serialized;
+  },
+  normalizeCreateRecordResponse (store, primaryModelClass, payload, id, requestType){
+    let newItem = this.normalize(primaryModelClass, payload).data;
+
+    return { data: newItem };
+  },
+  normalizeUpdateRecordResponse (store, primaryModelClass, payload, id, requestType){
+    let newItem = this.normalize(primaryModelClass, payload).data;
+
+    return { data: newItem };
   }
 });

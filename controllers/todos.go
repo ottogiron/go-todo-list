@@ -58,6 +58,7 @@ func handleDELETE(w http.ResponseWriter, r *http.Request) {
 		handleServerError(w, err)
 		return
 	}
+	w.WriteHeader(http.StatusNoContent)
 	collection := getTodoCollection(session)
 	collection.RemoveId(bson.ObjectIdHex(id))
 }
@@ -94,10 +95,6 @@ func handlePOST(w http.ResponseWriter, r *http.Request) {
 		collection.UpdateId(bson.ObjectIdHex(id), todo)
 	}
 	json.NewEncoder(w).Encode(todo)
-}
-
-func handlePATCH(w http.ResponseWriter, r *http.Request) {
-
 }
 
 func handleServerError(w http.ResponseWriter, err error) {
