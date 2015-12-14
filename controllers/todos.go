@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/ottogiron/chapi/server"
 	"github.com/ottogiron/gotodo/models"
@@ -74,5 +75,9 @@ func handlePOST(w http.ResponseWriter, r *http.Request) {
 }
 
 func createMongoSession() (*mgo.Session, error) {
-	return mgo.Dial("192.168.99.100")
+	mongoServer := "192.168.99.100"
+	if envMongoServer := os.Getenv("MONGO_URL"); envMongoServer != "" {
+		mongoServer = envMongoServer
+	}
+	return mgo.Dial(mongoServer)
 }
