@@ -22,6 +22,7 @@ type Todos struct {
 func (t *Todos) Register(server server.Server) {
 	server.HandleFunc("/todos", handleGet).Methods("GET")
 	server.HandleFunc("/todos", handlePOST).Methods("POST")
+	server.HandleFunc("/todos/{id}", handleDELETE).Methods("DELETE")
 }
 
 // Name identifier for controller
@@ -36,7 +37,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	collection := session.DB("todos").C("todos")
+	collection := getTodoCollection(session)
 	result := models.Todos{}
 	err = collection.Find(bson.M{}).All(&result)
 	if err != nil {
@@ -44,6 +45,20 @@ func handleGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(result)
+
+}
+
+func handleDELETE(w http.ResponseWriter, r *http.Request) {
+	vars := server.Vars(r)
+	id := vars["id"]
+	session, err := createMongoSession()
+	defer session.Close()
+	if err != nil {
+		handleServerError(w, err)
+		return
+	}
+	collection := getTodoCollection(session)
+	collection.RemoveId(id)
 }
 
 func handlePOST(w http.ResponseWriter, r *http.Request) {
@@ -64,14 +79,23 @@ func handlePOST(w http.ResponseWriter, r *http.Request) {
 	session, err := createMongoSession()
 	defer session.Close()
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		handleServerError(w, err)
 		return
 	}
 
-	collection := session.DB("todos").C("todos")
+	collection := getTodoCollection(session)
 	collection.Insert(todo)
 	json.NewEncoder(w).Encode(todo)
 
+}
+
+func handleServerError(w http.ResponseWriter, err error) {
+	http.Error(w, err.Error(), http.StatusInternalServerError)
+}
+
+func getTodoCollection(session *mgo.Session) *mgo.Collection {
+	collection := session.DB("todos").C("todos")
+	return collection
 }
 
 func createMongoSession() (*mgo.Session, error) {
